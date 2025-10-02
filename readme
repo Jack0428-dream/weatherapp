@@ -1,0 +1,5 @@
+Write the functions that hit the API
+- want functions that can take a location
+and return the weather data for that location
+(console.log first)
+- the functions that process the JSON data you're getting from the API and return an object with only the data you require for your app
