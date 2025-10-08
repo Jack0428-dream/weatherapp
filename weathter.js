@@ -4,27 +4,43 @@
 // for that location
 const text = document.querySelector('#location');
 const button = document.querySelector('button');
+const body = document.querySelector('body');
 
-function weatherJson() {
+async function showWeather() {
     let location = text.value;
-    const div = document.createElement('div');
 
-    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=4HZ9NFLDENKLDNGQJ35K9THY5`)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(response) {
-            console.log(response.days);
-        })
-        .catch(function(err) {
-            console.log(err);
-        })
-}
+    let weatherApi = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=4HZ9NFLDENKLDNGQJ35K9THY5`)
+    let json = await weatherApi.json();
+    let days = await json.days;
+    
+    console.log(days);
+    
+    for(let i = 0; i <= days.length-1; i++) {
+        const div = document.createElement('div');
+        const datetime = document.createElement('div');
+        const conditions = document.createElement('div');
+        const descriptions = document.createElement('div');
+        const temp = document.createElement('div');
+        const feelslike = document.createElement('div');
+
+        body.appendChild(div);
+        div.appendChild(datetime);
+        div.appendChild(conditions);
+        div.appendChild(descriptions);
+        div.appendChild(temp);
+        div.appendChild(feelslike);
+
+        datetime.textContent = days[i].datetime;
+        conditions.textContent = days[i].conditions;
+        descriptions.textContent = days[i].description;
+        temp.textContent = days[i].temp;
+        feelslike.textContent = days[i].feelslike;
+    }
+} 
 
 
 button.addEventListener('click', () => {
-    weatherJson();
+    showWeather();
     text.value = "";
 })
 
-// weatherJson();
