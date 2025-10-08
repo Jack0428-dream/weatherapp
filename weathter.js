@@ -5,6 +5,8 @@
 const text = document.querySelector('#location');
 const button = document.querySelector('button');
 const body = document.querySelector('body');
+const container = document.createElement('div');
+container.classList.add('container');
 
 async function showWeather() {
     let location = text.value;
@@ -15,15 +17,17 @@ async function showWeather() {
     
     console.log(days);
     
-    for(let i = 0; i <= days.length-1; i++) {
+    for(let i = 0; i <= 6; i++) {
         const div = document.createElement('div');
+        div.classList.add('card');
         const datetime = document.createElement('div');
         const conditions = document.createElement('div');
         const descriptions = document.createElement('div');
         const temp = document.createElement('div');
         const feelslike = document.createElement('div');
 
-        body.appendChild(div);
+        body.appendChild(container);
+        container.appendChild(div);
         div.appendChild(datetime);
         div.appendChild(conditions);
         div.appendChild(descriptions);
