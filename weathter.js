@@ -5,10 +5,12 @@
 const text = document.querySelector('#location');
 const button = document.querySelector('button');
 const body = document.querySelector('body');
-const container = document.createElement('div');
-container.classList.add('container');
+
 
 async function showWeather() {
+    const container = document.createElement('div');
+    container.classList.add('container');
+    
     let location = text.value;
 
     let weatherApi = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=4HZ9NFLDENKLDNGQJ35K9THY5`)
@@ -37,8 +39,8 @@ async function showWeather() {
         datetime.textContent = days[i].datetime;
         conditions.textContent = days[i].conditions;
         descriptions.textContent = days[i].description;
-        temp.textContent = days[i].temp;
-        feelslike.textContent = days[i].feelslike;
+        temp.textContent = `Current Temp: ${days[i].temp}`;
+        feelslike.textContent = `Feels like: ${days[i].feelslike}`;
     }
 } 
 
