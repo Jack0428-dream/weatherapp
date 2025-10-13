@@ -5,18 +5,23 @@
 const text = document.querySelector('#location');
 const button = document.querySelector('button');
 const body = document.querySelector('body');
+const container = document.createElement('div');
+container.classList.add('container');
+const cityname = document.createElement('div');
+cityname.classList.add('city');
+body.appendChild(cityname);
+body.appendChild(container);
 
 
 async function showWeather() {
-    const container = document.createElement('div');
-    container.classList.add('container');
-
+    container.textContent = "";
     let location = text.value;
 
     let weatherApi = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?key=4HZ9NFLDENKLDNGQJ35K9THY5`)
     let json = await weatherApi.json();
     let days = await json.days;
     
+    console.log(json);
     console.log(days);
     
     for(let i = 0; i <= 6; i++) {
@@ -29,7 +34,6 @@ async function showWeather() {
         const temp = document.createElement('div');
         const feelslike = document.createElement('div');
 
-        body.appendChild(container);
         container.appendChild(div);
         div.appendChild(datetime);
         div.appendChild(conditions);
@@ -49,6 +53,7 @@ async function showWeather() {
 
 button.addEventListener('click', () => {
     showWeather();
+    cityname.textContent = `Location: ${text.value}`;
     text.value = "";
 })
 
